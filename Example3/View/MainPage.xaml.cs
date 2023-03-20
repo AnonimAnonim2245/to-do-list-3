@@ -1,7 +1,7 @@
 ﻿
 using Example3.ViewModel;
 
-namespace Example3;
+namespace Example3.View;
 
 public partial class MainPage : ContentPage
 {

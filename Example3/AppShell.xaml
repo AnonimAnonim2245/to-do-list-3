@@ -3,12 +3,23 @@
     x:Class="Example3.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Example3"
+    xmlns:local="clr-namespace:Example3.View"
     Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
+    <TabBar>
+        <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+        <ShellContent
+            Title="Add Item"
+            ContentTemplate="{DataTemplate local:AddItems}"
+            Route="AddItems" />
+        <ShellContent
+            Title="Edit Item"
+            ContentTemplate="{DataTemplate local:EditItems}"
+            Route="EditItems" />
+    </TabBar>
+    
+
 
 </Shell>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Example3.ViewModel"
+             xmlns:model="clr-namespace:Example3.Models"
+             x:DataType="vm:MainViewModel"
+             Shell.TabBarIsVisible="False"
+             x:Class="Example3.View.MainPage">
+    <Grid RowDefinitions="80, Auto, *"
+          ColumnDefinitions=".75*, .35*"
+          Padding="10"
+          RowSpacing="5"
+          ColumnSpacing="-10"
+          
+           
+          >
+        <Frame Grid.Row="0" BorderColor="Gray"
+               CornerRadius="0"
+               Padding="15"
+               Margin="5,7,1,8">
+            <Entry Placeholder="Enter ToDo item..."
+                  PlaceholderColor="Black"
+               Text="{Binding Text}"
+                
+                TextColor="Black"
+                Grid.Row="0"
+             />
+        </Frame>
+        
+        <Button Text="Save"
+                CornerRadius="0"
+                BackgroundColor="Gray"
+                Command="{Binding AddCommand}"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="5,7,1,8"/>
+        <Button Text="+"
+                Grid.Row="1"
+                Grid.Column="2"
+                BackgroundColor="White"
+                TextColor="Black"
+                FontSize="30"
+                Command="{Binding MoveToANewTab1Command}" />
+
+    <CollectionView SelectionMode="Single" SelectedItem="{Binding Todo}" 
+                    ItemsSource="{Binding Todolist}"
+                    Grid.Row="2" 
+                    Grid.ColumnSpan="2"
+                    >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:ToDoModel">
+                    <Border StrokeShape="RoundRectangle 20">
+                        <Grid ColumnDefinitions="auto, *"
+                              RowDefinitions="*,*"
+                              ColumnSpacing="12">
+                         
+
+                            <Label Grid.Column="1"
+                                   Text="{Binding Name}"
+                                   VerticalTextAlignment="Center" />
+
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+
+                                        <SwipeItemView Grid.Column="1"  
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type  vm:MainViewModel}}, Path=DeleteCommand}"
+                                               CommandParameter="{Binding .}">
+                                            <StackLayout>
+                                                <Button BackgroundColor="Red" HeightRequest="79" WidthRequest="70" Text="X"  Margin="-10,30" >
+
+                                                </Button>
+                                            </StackLayout>
+
+                                        </SwipeItemView>
+
+
+
+
+
+
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+                                <Grid Padding="3,5">
+
+                                    <Frame>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=TapCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+
+
+                                        <Button BackgroundColor="LightGray"
+                                 CornerRadius="10"
+                                 WidthRequest="400"
+                                 HeightRequest="80"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center" 
+                                 Command="{Binding  Source={RelativeSource AncestorType={x:Type  vm:MainViewModel}},Path=MoveToANewTab2Command}"      
+                         
+                                    />
+                                    </Frame>
+
+
+
+                                    <CheckBox 
+                                    x:Name="checkBox"
+                                   Grid.Column="0"
+
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center" />
+                                    <Label Grid.Column="1" Margin="50" Text="{Binding .}" FontSize="20">
+
+                                        <Label.Triggers>
+
+                                            <DataTrigger 
+                                            TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference checkBox},Path=IsChecked}"
+                                                    Value="true">
+
+
+                                                <Setter Property="TextDecorations"
+                                                Value="Strikethrough" />
+
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label"
+                                                    Binding="{Binding Source={x:Reference checkBox},Path=IsChecked}"
+                                                    Value="false">
+
+
+                                                <Setter Property="TextDecorations"
+                                                Value="None" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+
+                                    </Label>
+                                </Grid>
+
+                            </SwipeView>
+                        </Grid>
+
+                    </Border>
+                </DataTemplate>
+            
+               
+         </CollectionView.ItemTemplate>
+        
+    </CollectionView>
+    </Grid>
+</ContentPage>

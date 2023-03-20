@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Example3.ViewModel"
+             x:DataType="vm:EditItemViewModel"
+             x:Class="Example3.View.EditItems"
+             Title="DetailPage">
+    <StackLayout Spacing="10" Padding="20">
+        <Grid RowDefinitions="80, Auto, *"
+          ColumnDefinitions=".50*,.50*"
+          Padding="10"
+          RowSpacing="5" 
+          ColumnSpacing="5"
+           >
+            <Label Text="{Binding Monkey.Name}"
+               FontSize="25"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <Button Text="Delete"
+                CornerRadius="0"
+                BackgroundColor="Gray"
+                Command="{Binding DeleteCommand}"
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="5,7,1,8"/>
+            <Button Text="Cancel"
+                CornerRadius="0"
+                BackgroundColor="Gray"
+                Command="{Binding MoveToFirstTabCommand}"
+                Grid.Row="3"
+                Grid.Column="2"
+                Margin="5,7,1,8"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>
